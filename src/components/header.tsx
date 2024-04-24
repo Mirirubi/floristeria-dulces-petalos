@@ -5,24 +5,28 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Header = () => {
-  const paths = usePathname();
-  const pathNames = paths.split("/").filter((path) => path);
+  const currentPath = usePathname();
+  const splittedPath = currentPath.split("/").filter((path) => path);
 
   function getBreadcrumbs() {
     return (
       <>
-        {pathNames.map((link, index) => {
-          let href = `/${pathNames.slice(0, index + 1).join("/")}`;
-          let itemClasses =
-            paths === href
-              ? "hover:underline mx-2 font-bold"
-              : "hover:underline mx-2";
-          let itemLink = link[0].toUpperCase() + link.slice(1, link.length);
+        {splittedPath.map((path, index) => {
+          const crumbRoute = `/${splittedPath.slice(0, index + 1).join("/")}`;
+          const crumbText = path[0].toUpperCase() + path.slice(1, path.length);
+          if (crumbRoute === currentPath) {
+            return (
+              <React.Fragment key={index}>
+                {">"}
+                <a className="mx-2 font-bold">{crumbText}</a>
+              </React.Fragment>
+            );
+          }
           return (
             <React.Fragment key={index}>
               {">"}
-              <Link className={itemClasses} href={href}>
-                {itemLink}
+              <Link className="hover:underline mx-2" href={crumbRoute}>
+                {crumbText}
               </Link>
             </React.Fragment>
           );
