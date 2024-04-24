@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Floristería Dulces Pétalos",
   description: "Tus flores más bonitas y duraderas al mejor precio",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
