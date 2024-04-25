@@ -42,7 +42,7 @@ const Header = () => {
           <div className="flex justify-between items-center h-full text-blueStone ">
             <div className="flex items-center">
               <Link href={`/`}>
-                <p className="font-['Snell_Roundhand'] text-2xl mr-2">
+                <p className="font-['Snell_Roundhand'] text-2xl hover:underline underline-offset-4 decoration-1 mr-2">
                   Floristería Dulces Pétalos 💐
                 </p>
               </Link>

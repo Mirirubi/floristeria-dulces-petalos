@@ -8,10 +8,12 @@ const config: Config = {
   ],
   theme: {
     colors: {
+      harp: "#deede1",
       manz: "#e9ed68",
       blueStone: "#005c4e",
     },
   },
   plugins: [],
 };
+
 export default config;
