@@ -7,9 +7,20 @@ async function getAllPlants(): Promise<Plant[]> {
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  const result = await response.json();
 
-  return result;
+  return await response.json();
 }
 
-export { getAllPlants };
+async function getPlantById(plantId: string): Promise<Plant> {
+  const response = await fetch(
+    `https://dulces-petalos.herokuapp.com/api/product/${plantId}`
+  );
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const plant = await response.json();
+  console.log(plant);
+  return plant;
+}
+
+export { getAllPlants, getPlantById };

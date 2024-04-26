@@ -5,10 +5,12 @@ import { Plant } from "@/modules/domain/Plant";
 interface PlantSummaryButtonProps {
   plant: Plant;
 }
+
 const PlantSummaryButton = (props: PlantSummaryButtonProps) => {
   const { plant } = props;
+
   return (
-    <Link href={`/${plant.name}`} key={plant.name}>
+    <Link href={`/${plant.id}`} key={plant.id}>
       <div className="button flex flex-col rounded-2xl bg-harp items-center p-2 m-2">
         <div className="text-lg font-bold py-2">{plant.name}</div>
         <div className="imageContainer">
@@ -18,7 +20,6 @@ const PlantSummaryButton = (props: PlantSummaryButtonProps) => {
             unoptimized
             width={240}
             height={240}
-            objectPosition="center"
           ></Image>
         </div>
         <div className="py-2 flex flex-col text-center">
@@ -29,4 +30,5 @@ const PlantSummaryButton = (props: PlantSummaryButtonProps) => {
     </Link>
   );
 };
+
 export default PlantSummaryButton;

@@ -8,9 +8,9 @@ export default function NotFound() {
         <div>¿Cómo he terminado aquí?</div>
       </div>
       <Image
-        className="levitating-image "
+        className="levitating-image"
         src="/lost.png"
-        alt="MR"
+        alt="Not found"
         width={300}
         height={300}
       />
