@@ -7,13 +7,14 @@ import Image from "next/image";
 import SearchingBlock from "@/components/searchingBlock";
 
 export default function Home() {
-  const [plantsToShow, setAllPlantsToShow] = useState<Plant[] | undefined>();
-  let allPlants: Plant[] = [];
+  const [allPlants, setAllPlants] = useState<Plant[] | undefined>();
+  const [plantsToShow, setPlantsToShow] = useState<Plant[] | undefined>();
 
   useEffect(() => {
     const fetchData = async () => {
-      allPlants = await obtainPlants();
-      setAllPlantsToShow(allPlants);
+      const repoPlants = await obtainPlants();
+      setAllPlants(repoPlants);
+      setPlantsToShow(repoPlants);
     };
 
     fetchData().catch((e) => {
@@ -26,9 +27,9 @@ export default function Home() {
       return [];
     }
 
-    return allPlants.filter((item: Plant) => {
-      const nameInLowercase = item.name.toLowerCase();
-      const binomialNameInLowercase = item.binomialName.toLowerCase();
+    return allPlants.filter((plant: Plant) => {
+      const nameInLowercase = plant.name.toLowerCase();
+      const binomialNameInLowercase = plant.binomialName.toLowerCase();
       const textToMatchInLowerCase = textToMatch.toLowerCase();
 
       return (
@@ -38,10 +39,14 @@ export default function Home() {
     });
   };
 
+  const plantFilter = (textToMatch: string) => {
+    setPlantsToShow(plantNamesFilter(textToMatch));
+  };
+
   if (plantsToShow) {
     return (
       <>
-        <SearchingBlock searchingFunction={plantNamesFilter} />
+        <SearchingBlock searchingFunction={plantFilter} />
         <div className="p-2">
           <div className="plantList grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {plantsToShow.map((plant) => {

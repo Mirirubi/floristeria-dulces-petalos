@@ -19,8 +19,6 @@ export default function Details({ params }: { params: { id: string } }) {
     });
   }, []);
 
-  console.log(plant);
-
   if (plant) {
     return (
       <div className="product mb-32 max-w-3xl mx-auto">

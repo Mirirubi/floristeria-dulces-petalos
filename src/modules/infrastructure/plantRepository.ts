@@ -19,7 +19,7 @@ async function getPlantById(plantId: string): Promise<Plant> {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
   const plant = await response.json();
-  console.log(plant);
+
   return plant;
 }
 
