@@ -4,13 +4,16 @@ import { obtainPlants } from "@/modules/application/obtainAllPlantsService";
 import { Plant } from "@/modules/domain/Plant";
 import PlantSummaryButton from "@/components/plantSummaryButton";
 import Image from "next/image";
+import SearchingBlock from "@/components/searchingBlock";
 
 export default function Home() {
-  const [plants, setPlants] = useState<Plant[]>();
+  const [plantsToShow, setAllPlantsToShow] = useState<Plant[] | undefined>();
+  let allPlants: Plant[] = [];
 
   useEffect(() => {
     const fetchData = async () => {
-      setPlants(await obtainPlants());
+      allPlants = await obtainPlants();
+      setAllPlantsToShow(allPlants);
     };
 
     fetchData().catch((e) => {
@@ -18,15 +21,35 @@ export default function Home() {
     });
   }, []);
 
-  if (plants) {
+  const plantNamesFilter = (textToMatch: string) => {
+    if (allPlants === undefined) {
+      return [];
+    }
+
+    return allPlants.filter((item: Plant) => {
+      const nameInLowercase = item.name.toLowerCase();
+      const binomialNameInLowercase = item.binomialName.toLowerCase();
+      const textToMatchInLowerCase = textToMatch.toLowerCase();
+
+      return (
+        nameInLowercase.includes(textToMatchInLowerCase) ||
+        binomialNameInLowercase.includes(textToMatchInLowerCase)
+      );
+    });
+  };
+
+  if (plantsToShow) {
     return (
-      <div className="p-2">
-        <div className="plantList grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {plants.map((plant) => {
-            return <PlantSummaryButton plant={plant} />;
-          })}
+      <>
+        <SearchingBlock searchingFunction={plantNamesFilter} />
+        <div className="p-2">
+          <div className="plantList grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {plantsToShow.map((plant) => {
+              return <PlantSummaryButton plant={plant} />;
+            })}
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
