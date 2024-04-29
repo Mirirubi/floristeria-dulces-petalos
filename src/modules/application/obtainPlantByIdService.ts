@@ -5,6 +5,7 @@ async function obtainPlantById(plantId: string): Promise<Plant | void> {
   let plant = await getPlantById(plantId);
 
   if (
+    plant &&
     plant.id &&
     plant.name &&
     plant.binomialName &&

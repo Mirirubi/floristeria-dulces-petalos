@@ -1,6 +1,6 @@
 import { Plant } from "../domain/Plant";
 import { obtainPlantById } from "./obtainPlantByIdService";
-import * as getPlantById from "../infrastructure/plantRepository";
+import * as plantsRepository from "../infrastructure/plantRepository";
 
 const plantId: string = "id";
 
@@ -33,10 +33,16 @@ const incompletePlantRepoResponse = {
   fertilizerType: "aFertilizerType",
 };
 
+jest.mock("../infrastructure/plantRepository", () => {
+  return {
+    __esModule: true,
+    ...jest.requireActual("../infrastructure/plantRepository"),
+  };
+});
+
 test("Plant is returned correctly when has all the properties", async () => {
   const repoResponse = repoPlant;
-  jest.spyOn(getPlantById, "getPlantById").mockResolvedValue(repoResponse);
-
+  jest.spyOn(plantsRepository, "getPlantById").mockResolvedValue(repoResponse);
   const expectedPlant: Plant = mappedPlant;
 
   const plant = await obtainPlantById(plantId);
@@ -47,7 +53,7 @@ test("Plant is returned correctly when has all the properties", async () => {
 test("When plant does not match the requirements is not returned", async () => {
   const repoResponse = incompletePlantRepoResponse;
   jest
-    .spyOn(getPlantById, "getPlantById")
+    .spyOn(plantsRepository, "getPlantById")
     .mockResolvedValue(repoResponse as Plant);
 
   const expectedPlant: any = undefined;

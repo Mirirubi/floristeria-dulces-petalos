@@ -5,19 +5,29 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import PlantDetailsBlock from "@/components/plantDetailsBlock";
+import NotFound from "../not-found";
+import Loading from "../loading";
 
 export default function Details({ params }: { params: { id: string } }) {
   const [plant, setPlant] = useState<Plant>();
+  const [plantNotFound, setPlantNotFound] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchplant = async () => {
-      setPlant(await obtainPlantById(params.id));
+      const requestedPlant = await obtainPlantById(params.id);
+      if (requestedPlant) {
+        setPlant(requestedPlant);
+      }
     };
 
     fetchplant().catch((e) => {
-      console.error("An error occurred while fetching the plant: ", e);
+      setPlantNotFound(true);
     });
   }, []);
+
+  if (plantNotFound) {
+    return <NotFound />;
+  }
 
   if (plant) {
     return (
@@ -46,11 +56,5 @@ export default function Details({ params }: { params: { id: string } }) {
     );
   }
 
-  return (
-    <div className="fixed inset-0 flex items-center justify-center">
-      <div className="animate-spin h-12 w-12 mx-8">
-        <Image src="/load.png" alt="Loading" width={100} height={100} />
-      </div>
-    </div>
-  );
+  return <Loading />;
 }

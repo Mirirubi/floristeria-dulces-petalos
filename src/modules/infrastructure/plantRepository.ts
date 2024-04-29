@@ -18,9 +18,7 @@ async function getPlantById(plantId: string): Promise<Plant> {
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  const plant = await response.json();
-
-  return plant;
+  return await response.json();
 }
 
 export { getAllPlants, getPlantById };

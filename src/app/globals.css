@@ -36,19 +36,15 @@ img {
 }
 
 .levitating-image {
-  position: sticky;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   animation: levitate 3s ease-in-out infinite alternate;
 }
 
 @keyframes levitate {
   0% {
-    transform: translate(-50%, -25%);
+    transform: translateY(25px);
   }
   100% {
-    transform: translate(-50%, -25%) translateY(-40px);
+    transform: translateY(-25px);
   }
 }
 

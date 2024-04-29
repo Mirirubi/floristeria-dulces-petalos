@@ -3,12 +3,14 @@ import React, { useState, useEffect } from "react";
 import { obtainPlants } from "@/modules/application/obtainAllPlantsService";
 import { Plant } from "@/modules/domain/Plant";
 import PlantSummaryButton from "@/components/plantSummaryButton";
-import Image from "next/image";
 import SearchingBlock from "@/components/searchingBlock";
+import NotFound from "./not-found";
+import Loading from "./loading";
 
 export default function Home() {
   const [allPlants, setAllPlants] = useState<Plant[] | undefined>();
   const [plantsToShow, setPlantsToShow] = useState<Plant[] | undefined>();
+  const [plantsNotFound, setPlantsNotFound] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,9 +20,13 @@ export default function Home() {
     };
 
     fetchData().catch((e) => {
-      console.error("An error occurred while fetching the data: ", e);
+      setPlantsNotFound(true);
     });
   }, []);
+
+  if (plantsNotFound) {
+    return <NotFound />;
+  }
 
   const plantNamesFilter = (textToMatch: string) => {
     if (allPlants === undefined) {
@@ -58,11 +64,5 @@ export default function Home() {
     );
   }
 
-  return (
-    <div className="fixed inset-0 flex items-center justify-center">
-      <div className="animate-spin h-12 w-12 mx-8">
-        <Image src="/load.png" alt="Loading" width={100} height={100} />
-      </div>
-    </div>
-  );
+  return <Loading />;
 }
