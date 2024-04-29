@@ -1,8 +1,32 @@
 import { getPlantById } from "../infrastructure/plantRepository";
 import { Plant } from "../domain/Plant";
 
-async function obtainPlantById(plantId: string): Promise<Plant> {
-  return await getPlantById(plantId);
+async function obtainPlantById(plantId: string): Promise<Plant | void> {
+  let plant = await getPlantById(plantId);
+
+  if (
+    plant.id &&
+    plant.name &&
+    plant.binomialName &&
+    plant.imgUrl &&
+    plant.price &&
+    plant.fertilizerType &&
+    plant.heightInCm &&
+    plant.wateringsPerWeek
+  ) {
+    return {
+      id: plant.id,
+      name: plant.name,
+      binomialName: plant.binomialName,
+      imgUrl: plant.imgUrl,
+      price: plant.price,
+      fertilizerType: plant.fertilizerType,
+      heightInCm: plant.heightInCm,
+      wateringsPerWeek: plant.wateringsPerWeek,
+    } as Plant;
+  }
+
+  return;
 }
 
 export { obtainPlantById };
