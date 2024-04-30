@@ -7,16 +7,19 @@ import Link from "next/link";
 import PlantDetailsBlock from "@/components/plantDetailsBlock";
 import NotFound from "../not-found";
 import Loading from "../loading";
+import { useHeaderContext } from "../../context/headerContext";
 
 export default function Details({ params }: { params: { id: string } }) {
   const [plant, setPlant] = useState<Plant>();
   const [plantNotFound, setPlantNotFound] = useState<boolean>(false);
+  const { setHeaderInfo } = useHeaderContext();
 
   useEffect(() => {
     const fetchplant = async () => {
       const requestedPlant = await obtainPlantById(params.id);
       if (requestedPlant) {
         setPlant(requestedPlant);
+        setHeaderInfo({ breadcrumbName: requestedPlant.name });
       }
     };
 

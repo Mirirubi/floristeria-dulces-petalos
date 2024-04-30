@@ -3,8 +3,10 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useHeaderContext } from "../context/headerContext";
 
 const Header = () => {
+  const { headerInfo } = useHeaderContext();
   const currentPath = usePathname();
   const splittedPath = currentPath.split("/").filter((path) => path);
 
@@ -18,7 +20,9 @@ const Header = () => {
             return (
               <React.Fragment key={index}>
                 {">"}
-                <a className="mx-2 font-bold">{crumbText}</a>
+                <a className="mx-2 font-bold">
+                  {headerInfo?.breadcrumbName || crumbText}
+                </a>
               </React.Fragment>
             );
           }

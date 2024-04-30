@@ -1,4 +1,5 @@
 import Header from "@/components/header";
+import { HeaderProvider } from "../context/headerContext";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -19,11 +20,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body className={inter.className}>
-        <Header />
-        <div className="container mx-auto px-4 p-8">{children}</div>
-      </body>
-    </html>
+    <HeaderProvider>
+      <html lang="es">
+        <body className={inter.className}>
+          <Header />
+          <div className="container mx-auto px-4 p-8">{children}</div>
+        </body>
+      </html>
+    </HeaderProvider>
   );
 }
