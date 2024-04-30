@@ -1,7 +1,7 @@
 import { getAllPlants } from "../infrastructure/plantRepository";
 import { Plant } from "../domain/Plant";
 
-async function obtainPlants(): Promise<Plant[]> {
+const obtainPlants = async (): Promise<Plant[]> => {
   let allPlants = await getAllPlants();
 
   allPlants = allPlants.filter(
@@ -25,6 +25,6 @@ async function obtainPlants(): Promise<Plant[]> {
   );
 
   return allPlants;
-}
+};
 
 export { obtainPlants };

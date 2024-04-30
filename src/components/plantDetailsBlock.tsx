@@ -4,8 +4,16 @@ import { fertilizerTypeAdapter } from "../modules/domain/fertilizerTypeAdapter";
 interface PlantSummaryButtonProps {
   plant: Plant;
 }
+
 const PlantDetailsBlock = (props: PlantSummaryButtonProps) => {
   const { plant } = props;
+
+  const wateringFrequency = () => {
+    if (plant.wateringsPerWeek === 1) {
+      return "una vez";
+    }
+    return `${plant.wateringsPerWeek} veces`;
+  };
 
   return (
     <div className="mx-auto flex flex-col justify-center p-8 w-90">
@@ -13,7 +21,7 @@ const PlantDetailsBlock = (props: PlantSummaryButtonProps) => {
       <div className="text-sm">{plant.binomialName}</div>
       <ul className="list-inside my-8 ml-4">
         {plant.wateringsPerWeek && (
-          <li>Regar {plant.wateringsPerWeek} veces a la semana</li>
+          <li>Regar {wateringFrequency()} a la semana</li>
         )}
         {plant.fertilizerType && (
           <li>

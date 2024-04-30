@@ -1,6 +1,6 @@
 import { Plant } from "../domain/Plant";
 
-async function getAllPlants(): Promise<Plant[]> {
+const getAllPlants = async (): Promise<Plant[]> => {
   const response = await fetch(
     "https://dulces-petalos.herokuapp.com/api/product"
   );
@@ -9,9 +9,9 @@ async function getAllPlants(): Promise<Plant[]> {
   }
 
   return await response.json();
-}
+};
 
-async function getPlantById(plantId: string): Promise<Plant> {
+const getPlantById = async (plantId: string): Promise<Plant> => {
   const response = await fetch(
     `https://dulces-petalos.herokuapp.com/api/product/${plantId}`
   );
@@ -19,6 +19,6 @@ async function getPlantById(plantId: string): Promise<Plant> {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
   return await response.json();
-}
+};
 
 export { getAllPlants, getPlantById };

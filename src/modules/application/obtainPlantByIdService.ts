@@ -1,7 +1,7 @@
 import { getPlantById } from "../infrastructure/plantRepository";
 import { Plant } from "../domain/Plant";
 
-async function obtainPlantById(plantId: string): Promise<Plant | void> {
+const obtainPlantById = async (plantId: string): Promise<Plant | void> => {
   let plant = await getPlantById(plantId);
   console.log(plant);
   if (
@@ -28,6 +28,6 @@ async function obtainPlantById(plantId: string): Promise<Plant | void> {
   }
 
   return;
-}
+};
 
 export { obtainPlantById };

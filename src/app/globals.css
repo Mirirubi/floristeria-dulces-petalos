@@ -52,7 +52,7 @@ ul {
   list-style-image: url("/flower.svg");
 }
 
-.detailsImg {
+.detailsImg img {
   width: 350px;
   height: 350px;
   border-radius: 5%;

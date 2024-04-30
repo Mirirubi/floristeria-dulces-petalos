@@ -7,7 +7,6 @@ const plantRepoResponse = {
   id: "id",
   name: "PlantName",
   binomialName: "PlantBinomialName",
-  fertilizerType: "aFertilizerType",
   heightInCm: 10,
   imgUrl: "PlantImgUrl",
   price: 1,

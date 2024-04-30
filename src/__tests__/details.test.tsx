@@ -4,6 +4,7 @@ import { render, screen } from "@testing-library/react";
 import Details from "../app/[id]/page";
 import React from "react";
 import * as obtaintPlantByIdService from "../modules/application/obtainPlantByIdService";
+import { HeaderProvider } from "@/context/headerContext";
 
 const plantId = "id";
 
@@ -38,11 +39,13 @@ describe("Details", () => {
       .mockResolvedValue(plant);
 
     render(
-      <Details
-        params={{
-          id: plantId,
-        }}
-      />
+      <HeaderProvider>
+        <Details
+          params={{
+            id: plantId,
+          }}
+        />
+      </HeaderProvider>
     );
 
     const nameText = await screen.findAllByText("Rosa");
@@ -52,11 +55,13 @@ describe("Details", () => {
 
   it("Renders loading view", async () => {
     render(
-      <Details
-        params={{
-          id: plantId,
-        }}
-      />
+      <HeaderProvider>
+        <Details
+          params={{
+            id: plantId,
+          }}
+        />
+      </HeaderProvider>
     );
 
     const loadingImage = screen.getByAltText("Loading");
@@ -70,11 +75,13 @@ describe("Details", () => {
       .mockRejectedValue(new Error("Plant not found"));
 
     render(
-      <Details
-        params={{
-          id: plantId,
-        }}
-      />
+      <HeaderProvider>
+        <Details
+          params={{
+            id: plantId,
+          }}
+        />
+      </HeaderProvider>
     );
 
     const notFoundText = await screen.findAllByText("Algo ha ido mal");

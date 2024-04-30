@@ -14,12 +14,12 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const repoPlants = await obtainPlants();
-      setAllPlants(repoPlants);
-      setPlantsToShow(repoPlants);
+      const repositoryPlants = await obtainPlants();
+      setAllPlants(repositoryPlants);
+      setPlantsToShow(repositoryPlants);
     };
 
-    fetchData().catch((e) => {
+    fetchData().catch(() => {
       setPlantsNotFound(true);
     });
   }, []);
@@ -33,10 +33,11 @@ export default function Home() {
       return [];
     }
 
+    const textToMatchInLowerCase = textToMatch.toLowerCase();
+
     return allPlants.filter((plant: Plant) => {
       const nameInLowercase = plant.name.toLowerCase();
       const binomialNameInLowercase = plant.binomialName.toLowerCase();
-      const textToMatchInLowerCase = textToMatch.toLowerCase();
 
       return (
         nameInLowercase.includes(textToMatchInLowerCase) ||
@@ -45,14 +46,14 @@ export default function Home() {
     });
   };
 
-  const plantFilter = (textToMatch: string) => {
+  const updateFilteredPlants = (textToMatch: string) => {
     setPlantsToShow(plantNamesFilter(textToMatch));
   };
 
   if (plantsToShow) {
     return (
       <>
-        <SearchingBlock searchingFunction={plantFilter} />
+        <SearchingBlock searchingFunction={updateFilteredPlants} />
         <div className="p-2">
           <div className="plantList grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {plantsToShow.map((plant) => {
