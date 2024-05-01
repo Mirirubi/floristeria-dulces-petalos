@@ -3,7 +3,7 @@ import { Plant } from "../domain/Plant";
 
 const obtainPlantById = async (plantId: string): Promise<Plant | void> => {
   let plant = await getPlantById(plantId);
-  console.log(plant);
+
   if (
     plant &&
     plant.id &&

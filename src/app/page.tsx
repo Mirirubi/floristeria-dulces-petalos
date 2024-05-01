@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { obtainPlants } from "@/modules/application/obtainAllPlantsService";
 import { Plant } from "@/modules/domain/Plant";
-import PlantSummaryButton from "@/components/plantSummaryButton";
+import PlantSummaryBlock from "@/components/plantSummaryBlock";
 import SearchingBlock from "@/components/searchingBlock";
 import NotFound from "./not-found";
 import Loading from "./loading";
@@ -54,12 +54,10 @@ export default function Home() {
     return (
       <>
         <SearchingBlock searchingFunction={updateFilteredPlants} />
-        <div className="p-2">
-          <div className="plantList grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {plantsToShow.map((plant) => {
-              return <PlantSummaryButton plant={plant} />;
-            })}
-          </div>
+        <div className="listView">
+          {plantsToShow.map((plant) => {
+            return <PlantSummaryBlock plant={plant} />;
+          })}
         </div>
       </>
     );

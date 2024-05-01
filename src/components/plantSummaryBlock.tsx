@@ -2,17 +2,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { Plant } from "@/modules/domain/Plant";
 
-interface PlantSummaryButtonProps {
+interface PlantSummaryBlockProps {
   plant: Plant;
 }
 
-const PlantSummaryButton = (props: PlantSummaryButtonProps) => {
+const PlantSummaryBlock = (props: PlantSummaryBlockProps) => {
   const { plant } = props;
 
   return (
     <Link href={`/${plant.id}`} key={plant.id}>
-      <div className="button flex flex-col rounded-2xl bg-harp items-center p-2 m-2">
-        <div className="text-lg font-bold py-2">{plant.name}</div>
+      <div className="listViewItem button">
+        <div className="listViewItemTitleContainer secondaryTitleText">
+          {plant.name}
+        </div>
         <div className="imageContainer">
           <Image
             src={plant.imgUrl}
@@ -22,13 +24,13 @@ const PlantSummaryButton = (props: PlantSummaryButtonProps) => {
             height={240}
           ></Image>
         </div>
-        <div className="py-2 flex flex-col text-center">
-          <div className="text-sm">{plant.binomialName}</div>
-          <div className="text-lg font-semibold">{plant.price} €</div>
+        <div className="listViewItemCaptionContainer">
+          <div className="primaryCaptionText">{plant.binomialName}</div>
+          <div className="secondaryRelevantText">{plant.price} €</div>
         </div>
       </div>
     </Link>
   );
 };
 
-export default PlantSummaryButton;
+export default PlantSummaryBlock;

@@ -6,17 +6,91 @@ img {
   object-fit: cover;
 }
 
-.plantList img {
-  width: 200px;
-  height: 200px;
-  border-radius: 10%;
-}
-
 .imageContainer {
   width: 200px;
   height: 200px;
   overflow: hidden;
   border-radius: 10%;
+}
+
+.primaryTitleText {
+  @apply text-2xl font-bold;
+}
+
+.secondaryTitleText {
+  @apply text-lg font-bold;
+}
+
+.primaryCaptionText {
+  @apply text-sm;
+}
+
+.primaryRelevantText {
+  @apply text-2xl font-medium flex justify-end;
+}
+
+.secondaryRelevantText {
+  @apply text-lg font-semibold;
+}
+
+.listView {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-2;
+}
+
+.listView img {
+  width: 200px;
+  height: 200px;
+  border-radius: 10%;
+}
+
+.listViewItem {
+  @apply flex flex-col rounded-2xl bg-harp items-center p-4 m-2;
+}
+
+.listViewItemCaptionContainer {
+  @apply py-2 flex flex-col text-center;
+}
+
+.listViewItemTitleContainer {
+  @apply py-2;
+}
+
+.detailViewContainer {
+  @apply mb-32 max-w-3xl mx-auto;
+}
+
+.detailViewButtonContainer {
+  @apply px-8 flex justify-end;
+}
+
+.primaryButton {
+  @apply button rounded-full bg-harp text-center max-w-min px-6 p-1;
+}
+
+.detailViewItemContainer {
+  @apply mx-auto px-4 p-8 grid grid-cols-1 md:grid-cols-2;
+}
+
+.detailViewInfoContainer {
+  @apply mx-auto flex flex-col justify-center p-8 w-96;
+}
+
+.detailViewListingContainer {
+  @apply list-inside my-8 ml-4;
+}
+
+.detailViewImageContainer {
+  @apply flex justify-center;
+}
+
+.detailViewImageContainer img {
+  width: 350px;
+  height: 350px;
+  border-radius: 5%;
+}
+
+ul {
+  list-style-image: url("/flower.svg");
 }
 
 .button:hover img {
@@ -46,14 +120,4 @@ img {
   100% {
     transform: translateY(-25px);
   }
-}
-
-ul {
-  list-style-image: url("/flower.svg");
-}
-
-.detailsImg img {
-  width: 350px;
-  height: 350px;
-  border-radius: 5%;
 }

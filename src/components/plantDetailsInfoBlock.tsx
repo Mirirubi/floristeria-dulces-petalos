@@ -1,11 +1,11 @@
 import { Plant } from "@/modules/domain/Plant";
 import { fertilizerTypeAdapter } from "../modules/domain/fertilizerTypeAdapter";
 
-interface PlantSummaryButtonProps {
+interface PlantSummaryBlockProps {
   plant: Plant;
 }
 
-const PlantDetailsBlock = (props: PlantSummaryButtonProps) => {
+const PlantDetailsInfoBlock = (props: PlantSummaryBlockProps) => {
   const { plant } = props;
 
   const wateringFrequency = () => {
@@ -16,10 +16,10 @@ const PlantDetailsBlock = (props: PlantSummaryButtonProps) => {
   };
 
   return (
-    <div className="mx-auto flex flex-col justify-center p-8 w-90">
-      <div className="text-2xl font-bold">{plant.name}</div>
-      <div className="text-sm">{plant.binomialName}</div>
-      <ul className="list-inside my-8 ml-4">
+    <div className="detailViewInfoContainer">
+      <div className="primaryTitleText">{plant.name}</div>
+      <div className="primaryCaptionText">{plant.binomialName}</div>
+      <ul className="detailViewListingContainer">
         {plant.wateringsPerWeek && (
           <li>Regar {wateringFrequency()} a la semana</li>
         )}
@@ -31,11 +31,9 @@ const PlantDetailsBlock = (props: PlantSummaryButtonProps) => {
         )}
         {plant.heightInCm && <li>Hasta {plant.heightInCm} cm de alto</li>}
       </ul>
-      <div className="text-2xl font-medium flex justify-end">
-        {plant.price} €
-      </div>
+      <div className="primaryRelevantText">{plant.price} €</div>
     </div>
   );
 };
 
-export default PlantDetailsBlock;
+export default PlantDetailsInfoBlock;
