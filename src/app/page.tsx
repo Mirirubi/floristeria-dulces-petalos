@@ -56,7 +56,7 @@ export default function Home() {
         <SearchingBlock searchingFunction={updateFilteredPlants} />
         <div className="listView">
           {plantsToShow.map((plant) => {
-            return <PlantSummaryBlock plant={plant} />;
+            return <PlantSummaryBlock key={plant.id} plant={plant} />;
           })}
         </div>
       </>
